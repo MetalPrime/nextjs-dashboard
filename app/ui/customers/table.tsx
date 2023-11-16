@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { CustomersTable, FormattedCustomersTable } from '@/app/lib/definitions';
+import Link from 'next/link';
 
 export default async function CustomersTable({
   customers,
@@ -35,7 +36,12 @@ export default async function CustomersTable({
                               width={28}
                               height={28}
                             />
-                            <p>{customer.name}</p>
+                            <Link
+                              href={`/dashboard/customers/${customer.id}/view`}
+                              className="rounded-md border p-2 hover:bg-gray-100"
+                            >
+                              {customer.name}
+                            </Link>
                           </div>
                         </div>
                         <p className="text-sm text-gray-500">
@@ -92,7 +98,12 @@ export default async function CustomersTable({
                             width={28}
                             height={28}
                           />
-                          <p>{customer.name}</p>
+                          <Link
+                            href={`/dashboard/customers/${customer.id}/view`}
+                            className="rounded-md border p-2 hover:bg-gray-100"
+                          >
+                            {customer.name}
+                          </Link>
                         </div>
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">

@@ -198,6 +198,45 @@ export async function fetchInvoiceById(id: string) {
   }
 }
 
+export async function fetchCustomerById(id:string) {
+  noStore();
+  try {
+    /* const data = await sql<CustomersTable>`
+    SELECT
+      customers.id,
+      customers.name,
+      customers.email,
+      customers.image_url,
+      COUNT(invoices.id) AS total_invoices,
+      SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,
+      SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid
+    FROM customers
+    JOIN invoices ON customers.id = invoices.customer_id
+    WHERE customers.id = ${id};
+    `; */
+
+    const data = await sql<CustomersTable>`
+    SELECT
+      customers.id,
+      customers.name,
+      customers.email,
+      customers.image_url,
+      COUNT(invoices.id) AS total_invoices,
+      SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,
+      SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid
+    FROM customers
+    LEFT JOIN invoices ON customers.id = invoices.customer_id
+    WHERE customers.id = ${id}
+    GROUP BY customers.id, customers.name, customers.email, customers.image_url
+    `;
+    console.log(data.rows[0]);
+    return data.rows[0];
+
+  } catch (error) {
+    console.error('Database Error:', error);
+  }
+}
+
 export async function fetchCustomers() {
   noStore();
   try {
