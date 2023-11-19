@@ -55,6 +55,8 @@ export type InvoicesTable = {
   status: 'pending' | 'paid';
 };
 
+export type InvoicesTableOmitUserInfo = Omit<InvoicesTable, "name"|"email"|"image_url">
+
 export type CustomersTable = {
   id: string;
   name: string;

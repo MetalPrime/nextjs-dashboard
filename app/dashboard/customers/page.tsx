@@ -24,7 +24,7 @@ export default async function Page({
 
   const customers = await fetchFilteredCustomers(query, currentPage);
 
-  const totalPages = await fetchCustomersPages(query);
+  const totalPages = await fetchCustomersPages();
 
 
   return (

@@ -1,4 +1,4 @@
-import { fetchCustomerById } from "@/app/lib/data";
+import { fetchCustomerById, fetchFilteredInvoicesByCustomer } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import clsx from "clsx";
 import { Metadata } from "next";
@@ -6,6 +6,9 @@ import { notFound } from "next/navigation";
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import { Card } from "@/app/ui/dashboard/cards";
+import { Suspense } from "react";
+import CustomersInvoicesTable from "@/app/ui/customers/table-customer-invoices";
+import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
 
 export const metadata: Metadata = {
     title: 'View User',
@@ -15,6 +18,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     const id = params.id;
 
     const customer = await fetchCustomerById(id);
+    const invoices = await fetchFilteredInvoicesByCustomer(id);
 
     if (!customer) {
         notFound();
@@ -60,6 +64,9 @@ export default async function Page({ params }: { params: { id: string } }) {
                     <Card title="Total Pending" value={customer.total_pending} type="pending" />
                     <Card title="Total Paid" value={customer.total_paid} type="collected" />
                 </div>
+                <Suspense key={id} fallback={<InvoicesTableSkeleton />}>
+                    <CustomersInvoicesTable invoices={invoices} />
+                </Suspense>
 
             </div>
 

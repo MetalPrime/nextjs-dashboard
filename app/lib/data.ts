@@ -2,11 +2,11 @@ import { sql } from '@vercel/postgres';
 import {
   CustomerField,
   CustomersTable,
-  InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
   User,
   Revenue,
+  InvoicesTableOmitUserInfo,
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -137,6 +137,26 @@ export async function fetchFilteredInvoices(
   }
 }
 
+export async function fetchFilteredInvoicesByCustomer(id: string){
+  noStore();
+  try {
+    const invoices = await sql<InvoicesTable>`
+      SELECT 
+        invoices.id,
+        invoices.amount,
+        invoices.date,
+        invoices.status
+      FROM invoices
+      WHERE invoices.customer_id = ${id};
+    `;
+
+    return invoices.rows;
+  } catch (error) {
+    console.log('Database invoices by customer Error:', error);
+    throw new Error('Failed to fetch invoices.');
+  }
+}
+
 export async function fetchInvoicesPages(query: string) {
   noStore();
   try {
@@ -159,7 +179,7 @@ export async function fetchInvoicesPages(query: string) {
   }
 }
 
-export async function fetchCustomersPages(query: string) {
+export async function fetchCustomersPages() {
   noStore();
   try {
     const count = await sql`SELECT COUNT(*)
@@ -176,12 +196,13 @@ export async function fetchCustomersPages(query: string) {
 export async function fetchInvoiceById(id: string) {
   noStore();
   try {
-    const data = await sql<InvoiceForm>`
+    const data = await sql<InvoicesTableOmitUserInfo>`
       SELECT
         invoices.id,
         invoices.customer_id,
         invoices.amount,
-        invoices.status
+        invoices.status,
+        invoices.date
       FROM invoices
       WHERE invoices.id = ${id};
     `;
