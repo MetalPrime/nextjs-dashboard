@@ -2,7 +2,8 @@ import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 
 import { Metadata } from 'next';
- 
+import Theme from './lib/theme-toggle';
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Acme Dashboard',
@@ -20,8 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head/>
+      <body className={`${inter.className} antialiased`}>
+        <Theme>
+          {children}
+        </Theme>
+      </body>
     </html>
   );
 }
