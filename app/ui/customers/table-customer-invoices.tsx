@@ -19,12 +19,12 @@ export default async function CustomersInvoicesTable({
       <div className="mt-6 flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
-            <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
+            <div className="overflow-hidden rounded-md bg-gray-50 dark:bg-gray-500 p-2 md:pt-0">
               <div className="md:hidden">
                 {invoices?.map((invoice) => (
                   <div
                     key={invoice.id}
-                    className="mb-2 w-full rounded-md bg-white p-4"
+                    className="mb-2 w-full rounded-md bg-white dark:bg-black p-4"
                   >
                     <div className="flex w-full items-center justify-between border-b py-5">
                       <div className="flex w-1/2 flex-col">
@@ -43,8 +43,8 @@ export default async function CustomersInvoicesTable({
                   </div>
                 ))}
               </div>
-              <table className="hidden min-w-full rounded-md text-gray-900 md:table">
-                <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
+              <table className="hidden min-w-full rounded-md text-gray-900 dark:text-gray-200 md:table">
+                <thead className="rounded-md bg-gray-50 dark:bg-gray-500 text-left text-sm font-normal">
                   <tr>
                     <th scope="col" className="px-3 py-5 font-medium">
                       Amount
@@ -58,16 +58,16 @@ export default async function CustomersInvoicesTable({
                   </tr>
                 </thead>
 
-                <tbody className="divide-y divide-gray-200 text-gray-900">
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-900 text-gray-900 dark:text-gray-200">
                   {invoices.map((invoice) => (
                     <tr key={invoice.id} className="group">
-                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                      <td className="whitespace-nowrap bg-white dark:bg-black px-4 py-5 text-sm">
                         {formatCurrency(invoice.amount)}
                       </td>
-                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                      <td className="whitespace-nowrap bg-white dark:bg-black px-4 py-5 text-sm">
                         {formatDateToLocal(invoice.date)}
                       </td>
-                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                      <td className="whitespace-nowrap bg-white dark:bg-black px-4 py-5 text-sm">
                       <InvoiceStatus status={invoice.status} />
                       </td>
                     </tr>

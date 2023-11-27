@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <p className="truncate text-2xl font-semibold ">
                             {customer.name}
                         </p>
-                        <p className="hidden text-lg text-gray-500 sm:block">
+                        <p className="hidden text-lg text-gray-500 dark:text-gray-50 sm:block">
                             {customer.email}
                         </p>
                     </div>

@@ -28,7 +28,7 @@ export default function EditInvoiceForm({
 
   return (
     <form action={dispatch}>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+      <div className="rounded-md bg-gray-50 dark:bg-gray-600 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
           <label htmlFor="customer" className="mb-2 block text-sm font-medium">
@@ -38,7 +38,7 @@ export default function EditInvoiceForm({
             <select
               id="customer"
               name="customerId"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className="peer block w-full rounded-md border dark:bg-black border-gray-200 dark:border-gray-700 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               defaultValue={invoice.customer_id}
             >
               <option value="" disabled>
@@ -50,7 +50,7 @@ export default function EditInvoiceForm({
                 </option>
               ))}
             </select>
-            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 dark:text-gray-50" />
           </div>
           {state.errors?.customerId ? (
             <div
@@ -79,7 +79,7 @@ export default function EditInvoiceForm({
                 type="number"
                 defaultValue={invoice.amount}
                 placeholder="Enter USD amount"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border dark:bg-black border-gray-200 dark:border-gray-700 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="amount-error"
               />
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -103,7 +103,7 @@ export default function EditInvoiceForm({
           <legend className="mb-2 block text-sm font-medium">
             Set the invoice status
           </legend>
-          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
+          <div className="rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-black px-[14px] py-3">
             <div className="flex gap-4">
               <div className="flex items-center">
                 <input

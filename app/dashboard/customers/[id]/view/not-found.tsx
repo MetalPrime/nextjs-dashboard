@@ -9,7 +9,7 @@ export default function NotFound() {
       <p>Could not find the requested customer.</p>
       <Link
         href="/dashboard/customers"
-        className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-400"
+        className="mt-4 rounded-md bg-blue-500 dark:bg-blue-400 px-4 py-2 text-sm text-white dark:text-black transition-colors hover:bg-blue-400 dark:hover:bg-blue-500"
       >
         Go Back
       </Link>
